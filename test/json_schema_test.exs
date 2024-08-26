@@ -328,19 +328,21 @@ defmodule JSONSchemaTest do
   test "handles ecto types with embeds recursively" do
     schema = %{
       value:
-        {:parameterized, Ecto.Embedded,
-         %Ecto.Embedded{
-           cardinality: :one,
-           related: %{
-             name: :string,
-             children:
-               {:parameterized, Ecto.Embedded,
-                %Ecto.Embedded{
-                  cardinality: :many,
-                  related: %{name: :string}
-                }}
-           }
-         }}
+        {:parameterized,
+         {Ecto.Embedded,
+          %Ecto.Embedded{
+            cardinality: :one,
+            related: %{
+              name: :string,
+              children:
+                {:parameterized,
+                 {Ecto.Embedded,
+                  %Ecto.Embedded{
+                    cardinality: :many,
+                    related: %{name: :string}
+                  }}}
+            }
+          }}}
     }
 
     json_schema =
