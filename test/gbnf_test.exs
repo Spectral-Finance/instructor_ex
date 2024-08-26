@@ -123,14 +123,15 @@ defmodule GBNFTest do
   test "nested inline objects" do
     ecto_schema = %{
       value:
-        {:parameterized, Ecto.Embedded,
-         %Ecto.Embedded{
-           cardinality: :one,
-           related: %{
-             name: :string,
-             birth_date: :date
-           }
-         }}
+        {:parameterized,
+         {Ecto.Embedded,
+          %Ecto.Embedded{
+            cardinality: :one,
+            related: %{
+              name: :string,
+              birth_date: :date
+            }
+          }}}
     }
 
     gbnf =
